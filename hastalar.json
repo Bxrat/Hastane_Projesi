@@ -1,0 +1,155 @@
+{
+  "hastalar": [
+    {
+      "id": 22122500001,
+      "ad_soyad": "Ahmet Yılmaz",
+      "saglik_puani": 10
+    },
+    {
+      "id": 22122500002,
+      "ad_soyad": "Ayşe Kaya",
+      "saglik_puani": 8
+    },
+    {
+      "id": 22122500003,
+      "ad_soyad": "Mehmet Öztürk",
+      "saglik_puani": 14
+    },
+    {
+      "id": 22122500004,
+      "ad_soyad": "Fatma Şahin",
+      "saglik_puani": 12
+    },
+    {
+      "id": 22122500005,
+      "ad_soyad": "İbrahim Demir",
+      "saglik_puani": 9
+    },
+    {
+      "id": 22122500006,
+      "ad_soyad": "Zeynep Arslan",
+      "saglik_puani": 11
+    },
+    {
+      "id": 22122500007,
+      "ad_soyad": "Ali Çetin",
+      "saglik_puani": 7
+    },
+    {
+      "id": 22122500008,
+      "ad_soyad": "Emine Koçak",
+      "saglik_puani": 13
+    },
+    {
+      "id": 22122500009,
+      "ad_soyad": "Hasan Gül",
+      "saglik_puani": 15
+    },
+    {
+      "id": 22122500010,
+      "ad_soyad": "Nur Çalışkan",
+      "saglik_puani": 10
+    },
+    {
+      "id": 22122500011,
+      "ad_soyad": "Murat Kılıç",
+      "saglik_puani": 6
+    },
+    {
+      "id": 22122500012,
+      "ad_soyad": "Levent Aydın",
+      "saglik_puani": 12
+    },
+    {
+      "id": 22122500013,
+      "ad_soyad": "Serap Erdoğan",
+      "saglik_puani": 11
+    },
+    {
+      "id": 22122500014,
+      "ad_soyad": "Emre Aktaş",
+      "saglik_puani": 9
+    },
+    {
+      "id": 22122500015,
+      "ad_soyad": "Canan Uygun",
+      "saglik_puani": 14
+    },
+    {
+      "id": 22122500016,
+      "ad_soyad": "Kaan Bozdoğan",
+      "saglik_puani": 8
+    },
+    {
+      "id": 22122500017,
+      "ad_soyad": "Diane Güneş",
+      "saglik_puani": 13
+    },
+    {
+      "id": 22122500018,
+      "ad_soyad": "Serdar Kara",
+      "saglik_puani": 10
+    },
+    {
+      "id": 22122500019,
+      "ad_soyad": "Gülsen Akçay",
+      "saglik_puani": 12
+    },
+    {
+      "id": 22122500020,
+      "ad_soyad": "Oğuz Yaman",
+      "saglik_puani": 7
+    },
+    {
+      "id": 22122500021,
+      "ad_soyad": "Sinem Kurtoğlu",
+      "saglik_puani": 11
+    },
+    {
+      "id": 22122500022,
+      "ad_soyad": "Barbaros Eken",
+      "saglik_puani": 15
+    },
+    {
+      "id": 22122500023,
+      "ad_soyad": "Ayla Tekin",
+      "saglik_puani": 9
+    },
+    {
+      "id": 22122500024,
+      "ad_soyad": "Erol Şimşek",
+      "saglik_puani": 13
+    },
+    {
+      "id": 22122500025,
+      "ad_soyad": "Filiz Erkan",
+      "saglik_puani": 10
+    },
+    {
+      "id": 22122500026,
+      "ad_soyad": "Kerem Gürol",
+      "saglik_puani": 8
+    },
+    {
+      "id": 22122500027,
+      "ad_soyad": "Meltem Şahin",
+      "saglik_puani": 14
+    },
+    {
+      "id": 22122500028,
+      "ad_soyad": "Rıza Alkan",
+      "saglik_puani": 11
+    },
+    {
+      "id": 22122500029,
+      "ad_soyad": "Selma Yıldız",
+      "saglik_puani": 12
+    },
+    {
+      "id": 22122500030,
+      "ad_soyad": "Umut Kösem",
+      "saglik_puani": 9
+    }
+  ],
+  "toplam_hasta": 30
+}

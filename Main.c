@@ -5,10 +5,12 @@
 
 #define Max_Karakter 100
 #define MAX_PATIENTS 1000
+#define LOG_FILE "hospital_log.txt"
+#define DEFAULT_CSV "hastalar_30.csv"
 
 // ==================== VERİ YAPILARI ====================
 typedef struct {
-    int id;
+    long id;
     char name[Max_Karakter];
     int health_score;
 } Patient;
@@ -32,12 +34,12 @@ void get_current_date(int *day, int *month, int *year) {
 }
 
 // ID oluştur: günay-yıl-öncelik-sıra (12 basamak)
-int create_patient_id(int day, int month, int year, int priority, int sequence) {
-    int id = day * 100000000 +        // İlk 2 basamak: gün
-             month * 1000000 +         // Sonraki 2 basamak: ay
-             year * 10000 +            // Sonraki 2 basamak: yıl
-             priority * 100 +          // Sonraki 2 basamak: öncelik (01/00)
-             sequence;                 // Son 4 basamak: sıra
+long create_patient_id(int day, int month, int year, int priority, int sequence) {
+    long id = day * 100000000LL +        // İlk 2 basamak: gün
+              month * 1000000LL +         // Sonraki 2 basamak: ay
+              year * 10000LL +            // Sonraki 2 basamak: yıl
+              priority * 100LL +          // Sonraki 2 basamak: öncelik (01/00)
+              sequence;                   // Son 4 basamak: sıra
     return id;
 }
 
@@ -110,7 +112,7 @@ PatientStore* initialize_store(int capacity) {
 }
 
 // Hasta ekle (Geleneksel Kodlama)
-void add_patient(PatientStore *store, int id, const char *name, int health_score) {
+void add_patient(PatientStore *store, long id, const char *name, int health_score) {
     if (store->size >= store->cap) {
         printf("HATA: Hastane dolu! (Kapasite: %d)\n", store->cap);
         return;
@@ -122,24 +124,24 @@ void add_patient(PatientStore *store, int id, const char *name, int health_score
     store->data[store->size].health_score = health_score;
     
     store->size++;
-    printf("Hasta başarıyla eklendi! ID: %d\n", id);
+    printf("Hasta başarıyla eklendi! ID: %ld\n", id);
 }
 
 // ID'ye göre sağlık puanını güncelle (Geleneksel Kodlama)
-void update_scores_by_id(PatientStore *store, int patient_id, int new_score) {
+void update_scores_by_id(PatientStore *store, long patient_id, int new_score) {
     int i;
     for (i = 0; i < store->size; i++) {
         if (store->data[i].id == patient_id) {
             store->data[i].health_score = new_score;
-            printf("Hasta ID %d sağlık puanı %d olarak güncellendi.\n", patient_id, new_score);
+            printf("Hasta ID %ld sağlık puanı %d olarak güncellendi.\n", patient_id, new_score);
             return;
         }
     }
-    printf("HATA: ID %d bulunamadı!\n", patient_id);
+    printf("HATA: ID %ld bulunamadı!\n", patient_id);
 }
 
 // ID'ye göre hastayı sil (Geleneksel Kodlama)
-void delete_by_id(PatientStore *store, int patient_id) {
+void delete_by_id(PatientStore *store, long patient_id) {
     int i, j;
     int found = 0;
     
@@ -151,13 +153,13 @@ void delete_by_id(PatientStore *store, int patient_id) {
                 store->data[j] = store->data[j + 1];
             }
             store->size--;
-            printf("Hasta ID %d başarıyla silindi.\n", patient_id);
+            printf("Hasta ID %ld başarıyla silindi.\n", patient_id);
             return;
         }
     }
     
     if (!found) {
-        printf("HATA: ID %d bulunamadı!\n", patient_id);
+        printf("HATA: ID %ld bulunamadı!\n", patient_id);
     }
 }
 
@@ -174,7 +176,7 @@ void list_patients(PatientStore *store) {
     
     int i;
     for (i = 0; i < store->size; i++) {
-        printf("%-15d | %-30s | %-15d\n", 
+        printf("%-15ld | %-30s | %-15d\n", 
                store->data[i].id, 
                store->data[i].name, 
                store->data[i].health_score);
@@ -194,7 +196,7 @@ void search_by_name(PatientStore *store, const char *search_name) {
     
     for (i = 0; i < store->size; i++) {
         if (strstr(store->data[i].name, search_name) != NULL) {
-            printf("ID: %d | Ad: %s | Sağlık Puanı: %d\n", 
+            printf("ID: %ld | Ad: %s | Sağlık Puanı: %d\n", 
                    store->data[i].id, 
                    store->data[i].name, 
                    store->data[i].health_score);
@@ -241,7 +243,7 @@ void sort_by_average(PatientStore *store) {
     printf("----------------------------------------------------------\n");
     
     for (i = 0; i < store->size; i++) {
-        printf("%-15d | %-30s | %-15d\n", 
+        printf("%-15ld | %-30s | %-15d\n", 
                sorted[i].id, 
                sorted[i].name, 
                sorted[i].health_score);
@@ -268,12 +270,12 @@ void display_menu() {
     printf("\n╔════════════════════════════════════════╗\n");
     printf("║     HASTANE HASTA YÖNETİM SİSTEMİ    ║\n");
     printf("╚════════════════════════════════════════╝\n");
-    printf("1. Yeni Hasta Ekle\n");
-    printf("2. Hastayı Sil (ID ile)\n");
-    printf("3. Hastayı Güncelle (ID ile)\n");
-    printf("4. Tüm Hastaları Listele\n");
-    printf("5. Ada Göre Ara\n");
-    printf("6. Sağlık Puanına Göre Sırala\n");
+    printf("1. Yeni Hasta Ekle (Dosyaya)\n");
+    printf("2. Hastayı Sil (ID ile - Dosyadan)\n");
+    printf("3. Hastayı Güncelle (ID ile - Dosyaya)\n");
+    printf("4. Ada Göre Ara (Dosyadan)\n");
+    printf("5. Sağlık Puanına Göre Sırala\n");
+    printf("6. Hastaları Listele (Dosyadan)\n");
     printf("7. Çıkış\n");
     printf("Seçim yapın: ");
 }
@@ -292,8 +294,22 @@ int main() {
     int choice;
     int patient_count = 0;  // Sistem tarafından kaydedilen hasta sayısı
     
+    // CSV dosyasından mevcut hasta sayısını oku
+    FILE *csv = fopen(DEFAULT_CSV, "r");
+    if (csv) {
+        char line[512];
+        while (fgets(line, sizeof(line), csv)) {
+            // İlk satır (header) atla
+            if (line[0] != 'I') {
+                patient_count++;
+            }
+        }
+        fclose(csv);
+    }
+    
     printf("Hastane Sistemi Başlatıldı!\n");
-    printf("Tarih: %02d.%02d.20%02d\n\n", day, month, year);
+    printf("Tarih: %02d.%02d.20%02d\n", day, month, year);
+    printf("Mevcut hasta sayısı: %d\n\n", patient_count);
     
     while (1) {
         display_menu();
@@ -301,7 +317,7 @@ int main() {
         getchar(); // Newline karakterini tüket
         
         if (choice == 1) {
-            // Yeni Hasta Ekle
+            // Yeni Hasta Ekle (Dosyaya)
             printf("\n--- YENİ HASTA KAYDÜ ---\n");
             
             char name[Max_Karakter];
@@ -311,7 +327,7 @@ int main() {
             
             printf("Hastanın adı ve soyadı: ");
             fgets(name, Max_Karakter, stdin);
-            name[strcspn(name, "\n")] = '\0'; // Newline kaldır
+            name[strcspn(name, "\n")] = '\0';
             
             printf("Giriş türü (1=Poliklinik, 2=Acil): ");
             scanf("%d", &entry_type);
@@ -319,9 +335,8 @@ int main() {
             printf("Hasta öncelikli mi? (1=Evet/Öncelikli, 0=Hayır): ");
             scanf("%d", &priority);
             
-            getchar(); // Newline karakterini tüket
+            getchar();
             
-            // Sağlık puanı hesapla
             if (entry_type == 1) {
                 health_score = calculate_health_score_polyclinic();
             } else if (entry_type == 2) {
@@ -330,55 +345,151 @@ int main() {
                 health_score = 15;
             }
             
-            // Hastanın sıra numarası artır
             patient_count++;
+            long patient_id = create_patient_id(day, month, year, priority, patient_count);
             
-            // ID oluştur
-            int patient_id = create_patient_id(day, month, year, priority, patient_count);
-            
-            // Hasta ekle
-            add_patient(hospital, patient_id, name, health_score);
+            // Dosyaya ekle (CSV formatı)
+            FILE *csv = fopen(DEFAULT_CSV, "a");
+            if (csv) {
+                fprintf(csv, "%ld,%s,%d\n", patient_id, name, health_score);
+                fclose(csv);
+                printf("Hasta başarıyla dosyaya eklendi! ID: %ld\n", patient_id);
+            }
             
         } else if (choice == 2) {
-            // Hastayı Sil
+            // Hastayı Sil (Dosyadan)
             printf("\n--- HASTA SİLME ---\n");
-            int delete_id;
+            long delete_id;
             printf("Silinecek hastanın ID'si: ");
-            scanf("%d", &delete_id);
-            delete_by_id(hospital, delete_id);
+            scanf("%ld", &delete_id);
+            getchar();
+            
+            // Dosyadan oku ve temp'e yaz (delete except this id)
+            FILE *csv = fopen(DEFAULT_CSV, "r");
+            FILE *temp = fopen("temp.csv", "w");
+            if (csv && temp) {
+                char line[512];
+                int found = 0;
+                while (fgets(line, sizeof(line), csv)) {
+                    long id;
+                    int score;
+                    char nm[Max_Karakter];
+                    if (sscanf(line, "%ld,%99[^,],%d", &id, nm, &score) == 3) {
+                        if (id != delete_id) {
+                            fprintf(temp, "%s", line);
+                        } else {
+                            found = 1;
+                        }
+                    }
+                }
+                fclose(csv);
+                fclose(temp);
+                remove(DEFAULT_CSV);
+                rename("temp.csv", DEFAULT_CSV);
+                if (found) printf("Hasta başarıyla silindi.\n");
+                else printf("HATA: ID bulunamadı!\n");
+            }
             
         } else if (choice == 3) {
-            // Hastayı Güncelle
+            // Hastayı Güncelle (Dosyaya)
             printf("\n--- HASTA GÜNCELLEME ---\n");
-            int update_id, new_score;
+            long update_id;
+            int new_score;
             printf("Güncellenecek hastanın ID'si: ");
-            scanf("%d", &update_id);
+            scanf("%ld", &update_id);
             printf("Yeni sağlık puanı: ");
             scanf("%d", &new_score);
-            update_scores_by_id(hospital, update_id, new_score);
+            getchar();
+            
+            // Dosyadan oku ve güncelle
+            FILE *csv = fopen(DEFAULT_CSV, "r");
+            FILE *temp = fopen("temp.csv", "w");
+            if (csv && temp) {
+                char line[512];
+                int found = 0;
+                while (fgets(line, sizeof(line), csv)) {
+                    long id;
+                    int score;
+                    char nm[Max_Karakter];
+                    if (sscanf(line, "%ld,%99[^,],%d", &id, nm, &score) == 3) {
+                        if (id == update_id) {
+                            fprintf(temp, "%ld,%s,%d\n", id, nm, new_score);
+                            found = 1;
+                        } else {
+                            fprintf(temp, "%s", line);
+                        }
+                    }
+                }
+                fclose(csv);
+                fclose(temp);
+                remove(DEFAULT_CSV);
+                rename("temp.csv", DEFAULT_CSV);
+                if (found) printf("Hasta başarıyla güncellendi.\n");
+                else printf("HATA: ID bulunamadı!\n");
+            }
             
         } else if (choice == 4) {
-            // Tüm Hastaları Listele
-            list_patients(hospital);
+            // Ada Göre Ara (Dosyadan)
+            printf("\n--- ADA GÖRE ARAMA ---\n");
+            char search[Max_Karakter];
+            printf("Aranacak isim: ");
+            fgets(search, Max_Karakter, stdin);
+            search[strcspn(search, "\n")] = '\0';
+            
+            FILE *csv = fopen(DEFAULT_CSV, "r");
+            if (csv) {
+                char line[512];
+                int found = 0;
+                printf("%-15s | %-30s | %-15s\n", "ID", "Ad Soyad", "Sağlık Puanı");
+                printf("-------------------------------------\n");
+                while (fgets(line, sizeof(line), csv)) {
+                    long id;
+                    int score;
+                    char nm[Max_Karakter];
+                    if (sscanf(line, "%ld,%99[^,],%d", &id, nm, &score) == 3) {
+                        if (strstr(nm, search)) {
+                            printf("%-15ld | %-30s | %-15d\n", id, nm, score);
+                            found = 1;
+                        }
+                    }
+                }
+                fclose(csv);
+                if (!found) printf("Aranan hasta bulunamadı.\n");
+            }
             
         } else if (choice == 5) {
-            // Ada Göre Ara
-            printf("\n--- ADA GÖRE ARAMA ---\n");
-            char search_name[Max_Karakter];
-            printf("Aranacak isim: ");
-            fgets(search_name, Max_Karakter, stdin);
-            search_name[strcspn(search_name, "\n")] = '\0';
-            search_by_name(hospital, search_name);
-            
-        } else if (choice == 6) {
             // Sağlık Puanına Göre Sırala
             sort_by_average(hospital);
             
+        } else if (choice == 6) {
+            // Hastaları Listele (Dosyadan)
+            printf("\n========== HASTA LİSTESİ (DOSYADAN) ==========\n");
+            FILE *csv = fopen(DEFAULT_CSV, "r");
+            if (csv) {
+                char line[512];
+                int count = 0;
+                printf("%-15s | %-30s | %-15s\n", "ID", "Ad Soyad", "Sağlık Puanı");
+                printf("-------------------------------------\n");
+                while (fgets(line, sizeof(line), csv)) {
+                    long id;
+                    int score;
+                    char nm[Max_Karakter];
+                    if (sscanf(line, "%ld,%99[^,],%d", &id, nm, &score) == 3) {
+                        printf("%-15ld | %-30s | %-15d\n", id, nm, score);
+                        count++;
+                    }
+                }
+                printf("====================================\n");
+                printf("Toplam: %d\n\n", count);
+                fclose(csv);
+            } else {
+                printf("Dosya bulunamadı!\n");
+            }
+            
         } else if (choice == 7) {
             // Çıkış
-            printf("\nSistem kapatılıyor... Bellek temizleniyor...\n");
+            printf("\nSistem kapatılıyor... Hoşça kalın!\n");
             cleanup_store(hospital);
-            printf("Hoşça kalın!\n");
             break;
             
         } else {

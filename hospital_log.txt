@@ -1,0 +1,78 @@
+[22.12.2025 19:59:48] Sistem baslatildi
+[22.12.2025 19:59:54] Tum hastalar listelendi
+[22.12.2025 19:59:55] Tum hastalar listelendi
+[22.12.2025 20:00:35] Yeni hasta eklendi - ID: -2082717195, Ad: Berat Dağsever, Saglik Puani: 3
+[22.12.2025 20:00:44] Tum hastalar listelendi
+[22.12.2025 20:01:06] Sistem baslatildi
+[22.12.2025 20:01:06] Yeni hasta eklendi - ID: -2082717295, Ad: Test Hasta, Saglik Puani: 15
+[22.12.2025 20:01:06] Tum hastalar listelendi
+[22.12.2025 20:01:06] Sistem kapatildi
+[22.12.2025 20:02:01] Sistem baslatildi
+[22.12.2025 20:02:01] Yeni hasta eklendi - ID: 22122510001, Ad: Ahmet Yilmaz, Saglik Puani: 15
+[22.12.2025 20:02:01] Tum hastalar listelendi
+[22.12.2025 20:02:01] Sistem kapatildi
+[22.12.2025 20:02:10] Sistem baslatildi
+[22.12.2025 20:02:10] Yeni hasta eklendi - ID: 22122500001, Ad: Ayse Kaya, Saglik Puani: 0
+[22.12.2025 20:02:10] Gecersiz menu secimi yapildi
+[22.12.2025 20:02:10] Yeni hasta eklendi - ID: 22122500002, Ad: Mehmet Ozdemir, Saglik Puani: 15
+[22.12.2025 20:02:10] Tum hastalar listelendi
+[22.12.2025 20:02:10] Sistem kapatildi
+[22.12.2025 20:02:19] Sistem baslatildi
+[22.12.2025 20:02:19] Yeni hasta eklendi - ID: 22122500001, Ad: Test Hasta, Saglik Puani: 15
+[22.12.2025 20:02:19] CSV kaydetme basarili - hastalar.csv (1 hasta kaydedildi)
+[22.12.2025 20:02:19] Sistem kapatildi
+[22.12.2025 20:02:31] Sistem baslatildi
+[22.12.2025 20:02:31] Yeni hasta eklendi - ID: 22122500001, Ad: Test2 Veri, Saglik Puani: 15
+[22.12.2025 20:02:31] JSON kaydetme basarili - hastalar.json (1 hasta kaydedildi)
+[22.12.2025 20:02:31] Sistem kapatildi
+[22.12.2025 20:05:48] Sistem baslatildi
+[22.12.2025 20:05:48] JSON yukleme basarili - hastalar.json (0 hasta yuklendi)
+[22.12.2025 20:05:48] Tum hastalar listelendi
+[22.12.2025 20:05:48] Hastalar saglik puanina gore siralandi
+[22.12.2025 20:05:48] Sistem kapatildi
+[22.12.2025 20:06:08] Sistem baslatildi
+[22.12.2025 20:06:08] JSON yukleme basarili - hastalar.json (0 hasta yuklendi)
+[22.12.2025 20:06:08] Tum hastalar listelendi
+[22.12.2025 20:06:08] Sistem kapatildi
+[22.12.2025 20:06:15] Sistem baslatildi
+[22.12.2025 20:06:15] JSON yukleme basarili - hastalar.json (0 hasta yuklendi)
+[22.12.2025 20:06:16] Tum hastalar listelendi
+[22.12.2025 20:06:16] Sistem kapatildi
+[22.12.2025 20:07:28] Sistem baslatildi
+[22.12.2025 20:07:28] JSON yukleme basarili - hastalar.json (30 hasta yuklendi)
+[22.12.2025 20:07:29] Tum hastalar listelendi
+[22.12.2025 20:07:29] Sistem kapatildi
+[22.12.2025 20:07:35] Sistem baslatildi
+[22.12.2025 20:07:35] JSON yukleme basarili - hastalar.json (30 hasta yuklendi)
+[22.12.2025 20:07:36] Hastalar saglik puanina gore siralandi
+[22.12.2025 20:07:36] Sistem kapatildi
+[22.12.2025 20:07:43] Sistem baslatildi
+[22.12.2025 20:07:43] JSON yukleme basarili - hastalar.json (30 hasta yuklendi)
+[22.12.2025 20:07:44] CSV kaydetme basarili - hastalar_30.csv (30 hasta kaydedildi)
+[22.12.2025 20:07:44] Sistem kapatildi
+[22.12.2025 20:08:18] Sistem baslatildi
+[22.12.2025 20:08:18] CSV yukleme basarili - hastalar_30.csv (30 hasta yuklendi)
+[22.12.2025 20:08:19] Tum hastalar listelendi
+[22.12.2025 20:08:19] Sistem kapatildi
+[22.12.2025 20:09:30] Sistem baslatildi
+[22.12.2025 20:09:34] Tum hastalar listelendi
+[22.12.2025 20:10:05] JSON yukleme basarili - hastalar.json (30 hasta yuklendi)
+[22.12.2025 20:10:10] Tum hastalar listelendi
+[22.12.2025 20:12:10] Sistem baslatildi
+[22.12.2025 20:12:10] CSV dosyasindan hastalar listelendi - hastalar_30.csv (30 hasta)
+[22.12.2025 20:12:10] Sistem kapatildi
+[22.12.2025 20:12:16] Sistem baslatildi
+[22.12.2025 20:12:16] JSON dosyasindan hastalar listelendi - hastalar.json (30 hasta)
+[22.12.2025 20:12:16] Sistem kapatildi
+[22.12.2025 20:12:25] Sistem baslatildi
+[22.12.2025 20:12:25] Sistem kapatildi
+[22.12.2025 20:13:07] Sistem baslatildi
+[22.12.2025 20:13:25] HATA: CSV listeleme dosyasi bulunamadi - hastalar_30.cvs
+[22.12.2025 20:13:27] HATA: CSV listeleme dosyasi bulunamadi - [A[A[B[B
+[22.12.2025 20:13:39] HATA: CSV listeleme dosyasi bulunamadi - hastalar_30
+[22.12.2025 20:14:06] HATA: JSON listeleme dosyasi bulunamadi - hastalar
+[22.12.2025 20:14:22] JSON dosyasindan hastalar listelendi - hastalar.json (30 hasta)
+[22.12.2025 20:14:44] CSV dosyasindan hastalar listelendi - hastalar_30.csv (30 hasta)
+[22.12.2025 20:15:16] Hasta guncelleme - ID: 22122500008, Yeni Saglik Puani: 3
+[22.12.2025 20:15:35] Hasta silme istegi - ID: 22122500007
+[22.12.2025 20:16:07] Hastalar saglik puanina gore siralandi
